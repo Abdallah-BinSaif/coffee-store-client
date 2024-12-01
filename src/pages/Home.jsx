@@ -1,11 +1,32 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import banner from "../assets/banner.png"
 import icon1 from "../assets/icons/1.png"
 import icon2 from "../assets/icons/2.png"
 import icon3 from "../assets/icons/3.png"
 import icon4 from "../assets/icons/4.png"
+import Header from "../components/Header.jsx";
+import {Link} from "react-router-dom";
+import {TbMug} from "react-icons/tb";
 
 const Home = () => {
+    const [coffees, setCoffees] = useState([]);
+    useEffect(() => {
+        fetch("http://localhost:5000/coffees")
+            .then(res => res.json())
+            .then(data => {
+                setCoffees(data)
+            })
+    }, []);
+
+    const handleDelete = (id) => {
+        console.log(id)
+        fetch(`http://localhost/coffees/${id}`,{
+            method: "DELETE",
+        }).then(res => res.json()).then(data=>{
+            console.log(data)
+        })
+    }
+    
     return (
         <>
             <div className={""} style={{
@@ -50,6 +71,33 @@ const Home = () => {
                     </div>
                 </div>
 
+            </div>
+
+            <div>
+                <Header></Header>
+                <div className={"text-center mb-6 rounded-lg"}>
+                    <Link to={"/add"}>
+                        <button className="btn border-none bg-[#E3B577] text-black text-base">Add Coffee <TbMug></TbMug></button>
+                    </Link>
+                </div>
+                <div className={"grid grid-cols-2 gap-6 container mx-auto"}>
+                    {
+                        coffees?.map(cof => <div className={"flex items-center bg-[#F5F4F1]"} key={cof._id}>
+                            <img className={"w-1/3"} src={cof.photo}/>
+                            <div className={"w-1/3 text-sm"}>
+                                <p><strong>Name:</strong>{cof.name}</p>
+                                <p><strong>Name:</strong>{cof.chef}</p>
+                                <p><strong>Name:</strong>{cof.price || 0} taka</p>
+                            </div>
+                            <div className="join join-vertical w-1/3 m-3">
+                                <button className="btn join-item bg-[#D2b48C]">Details</button>
+                                <button className="btn join-item bg-[#D2B48C]">Update</button>
+                                <button onClick={()=>handleDelete(cof._id)} className="btn join-item bg-[#D2B48C]">Delete</button>
+                            </div>
+
+                        </div>)
+                    }
+                </div>
             </div>
         </>
     );
