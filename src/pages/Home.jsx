@@ -94,9 +94,11 @@ const Home = () => {
                                 <p><strong>Name:</strong>{cof.price || 0} taka</p>
                             </div>
                             <div className="join join-vertical w-1/3 m-3">
-                                <button className="btn join-item bg-[#D2b48C]">Details</button>
-                                <button className="btn join-item bg-[#D2B48C]">Update</button>
-                                <button onClick={()=>handleDelete(cof._id)} className="btn join-item bg-[#D2B48C]">Delete</button>
+                                <Link to={`/details/${cof._id}`} className="btn join-item bg-[#D2b48C]">Details</Link>
+                                <Link className="btn join-item bg-[#D2B48C]" to={`/update/${cof._id}`}>
+                                    <button>Update</button>
+                                </Link>
+                                <button onClick={() => handleDelete(cof._id)} className="btn join-item bg-[#D2B48C]">Delete</button>
                             </div>
 
                         </div>)

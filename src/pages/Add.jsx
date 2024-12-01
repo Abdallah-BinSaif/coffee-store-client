@@ -1,19 +1,13 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import {IoIosArrowRoundBack} from "react-icons/io";
+import formData1 from "../utils/utils.js";
 
 const Add = () => {
     const handleSubmitAdd = (e) => {
         e.preventDefault();
         const form = e.target;
-        const name = form.name.value;
-        const chef = form.chef.value;
-        const supplier = form.supplier.value;
-        const taste = form.taste.value;
-        const category = form.category.value;
-        const details = form.details.value;
-        const photo = form.photo.value;
-        const coffee = {name, chef, supplier, taste, category, details, photo}
+        const coffee = formData1(form)
         console.log(coffee)
         fetch("http://localhost:5000/coffees",{
             method: "POST",
