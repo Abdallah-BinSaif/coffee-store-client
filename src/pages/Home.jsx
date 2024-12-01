@@ -20,10 +20,14 @@ const Home = () => {
 
     const handleDelete = (id) => {
         console.log(id)
-        fetch(`http://localhost/coffees/${id}`,{
+        fetch(`http://localhost:5000/coffees/${id}`,{
             method: "DELETE",
         }).then(res => res.json()).then(data=>{
             console.log(data)
+            if(data.deletedCount){
+                const remaining = coffees.filter(cof => cof._id !== id)
+                setCoffees(remaining)
+            }
         })
     }
     
