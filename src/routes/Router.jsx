@@ -5,6 +5,8 @@ import Home from "../pages/Home.jsx";
 import Add from "../pages/Add.jsx";
 import Update from "../pages/Update.jsx";
 import Details from "../pages/Details.jsx";
+import Login from "../components/authentication/Login.jsx";
+import Registration from "../components/authentication/Registration.jsx";
 
 const router = createBrowserRouter([
     {
@@ -26,8 +28,16 @@ const router = createBrowserRouter([
                 path:"/details/:id",
                 loader: ({params}) => fetch(`http://localhost:5000/coffees/${params.id}`),
                 element: <Details/>,
+            },{
+                path:"/login",
+                element: <Login></Login>
+            },{
+                path: "/register",
+                element: <Registration></Registration>
             }
         ]
     },
+
+
 ]);
 export default router;

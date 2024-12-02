@@ -94,7 +94,7 @@ const Home = () => {
                                 <p><strong>Name:</strong>{cof.price || 0} taka</p>
                             </div>
                             <div className="join join-vertical w-1/3 m-3">
-                                <Link to={`/details/${cof._id}`} className="btn join-item bg-[#D2b48C]">Details</Link>
+                                <Link to={`/details/${cof._id}`} className="btn join-item bg-[#D2b48C]"><button>Details</button></Link>
                                 <Link className="btn join-item bg-[#D2B48C]" to={`/update/${cof._id}`}>
                                     <button>Update</button>
                                 </Link>
