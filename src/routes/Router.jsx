@@ -7,6 +7,7 @@ import Update from "../pages/Update.jsx";
 import Details from "../pages/Details.jsx";
 import Login from "../components/authentication/Login.jsx";
 import Registration from "../components/authentication/Registration.jsx";
+import Private from "../components/authentication/Private.jsx";
 
 const router = createBrowserRouter([
     {
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
                 element: <Add/>,
             },{
                 path:"/update/:id",
-                element: <Update/>,
+                element: <Private><Update/></Private>,
                 loader: ({params}) => fetch(`http://localhost:5000/coffees/${params.id}`)
             },{
                 path:"/details/:id",
