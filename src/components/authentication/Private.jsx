@@ -9,13 +9,13 @@ const Private = ({children}) => {
     if(loading){
         return (
             <div className={"min-h-screen flex justify-center items-center"}>
-
+                <div>Loading.................</div>
             </div>
         )
     }
 
     if(!currentUser){
-        return <Navigate to={"/login"}/>
+        return <Navigate state={{from: location.pathname}} to={"/login"}/>
     }
 
     return (

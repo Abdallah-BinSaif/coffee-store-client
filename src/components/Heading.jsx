@@ -1,8 +1,10 @@
 import React, {useContext} from 'react';
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import {authContext} from "./AuthProvider.jsx";
 
 const Heading = () => {
+    // const location = useLocation();
+    // console.log(location)
     const {currentUser,signOutUser} = useContext(authContext);
 
     const handleLogout = () => {
@@ -13,7 +15,7 @@ const Heading = () => {
             <div className={"flex justify-between container mx-auto items-center"}>
                 <div className={""}>
                     <img src={""}/>
-                    <p>{currentUser.email}</p>
+                    <p>{currentUser?.email}</p>
                 </div>
                 <div className={"flex justify-center items-center gap-2 py-4 "}>
                     <img className={"h-10"} src={"/logo1.png"}/>

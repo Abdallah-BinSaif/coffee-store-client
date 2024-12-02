@@ -1,9 +1,10 @@
 import React, {useContext} from 'react';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {FcGoogle} from "react-icons/fc";
 import {authContext} from "../AuthProvider.jsx";
 
 const Registration = () => {
+    const navigate = useNavigate();
     const {createUser}= useContext(authContext)
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -16,6 +17,7 @@ const Registration = () => {
             .then((data)=>{
                 console.log(data)
                 console.log(data.user)
+                navigate("/")
             })
             .catch((err)=>{
                 console.log(err.code)

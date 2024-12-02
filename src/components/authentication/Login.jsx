@@ -1,11 +1,13 @@
 import React, {useContext} from "react";
-import {Link} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import {FcGoogle} from "react-icons/fc";
 import {authContext} from "../AuthProvider.jsx";
 
 
 const Login = () => {
-    const {signInUser} = useContext(authContext)
+    const location = useLocation()
+    const {signInUser, signInWithGoogle} = useContext(authContext)
+    const navigate = useNavigate()
     const handleSubmit = (e) => {
         e.preventDefault()
         const form = e.target
@@ -17,6 +19,17 @@ const Login = () => {
             .then((data)=>{
                 console.log(data)
                 console.log(data.user)
+                navigate(`${location.state ? location.state.from : "/"}`)
+            })
+            .catch((err)=>{
+                console.log(err.code)
+            })
+    }
+    const handleGoogle = () => {
+        signInWithGoogle()
+            .then((result)=>{
+                console.log(result.user)
+                navigate(`${location.state ? location.state.from : "/"}`)
             })
             .catch((err)=>{
                 console.log(err.code)
@@ -55,7 +68,7 @@ const Login = () => {
                     </form>
                     <div className={"divider"}>OR</div>
                     <div className="form-control mb-6 mx-7">
-                        <button className="btn btn-outline">Google<FcGoogle></FcGoogle></button>
+                        <button onClick={handleGoogle} className="btn btn-outline">Google<FcGoogle></FcGoogle></button>
                     </div>
                 </div>
             </div>
