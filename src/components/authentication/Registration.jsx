@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Link} from "react-router-dom";
 import {FcGoogle} from "react-icons/fc";
+import {authContext} from "../AuthProvider.jsx";
 
 const Registration = () => {
+    const {createUser}= useContext(authContext)
     const handleSubmit = (e) => {
         e.preventDefault()
         const form = e.target
@@ -10,7 +12,14 @@ const Registration = () => {
         const email = form.email.value;
         const password = form.email.value;
 
-        console.log(user)
+        createUser(email, password)
+            .then((data)=>{
+                console.log(data)
+                console.log(data.user)
+            })
+            .catch((err)=>{
+                console.log(err.code)
+            })
     }
     return (
         <div className="hero bg-base-200 min-h-screen">
