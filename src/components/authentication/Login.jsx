@@ -2,6 +2,7 @@ import React, {useContext} from "react";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import {FcGoogle} from "react-icons/fc";
 import {authContext} from "../AuthProvider.jsx";
+import Swal from "sweetalert2";
 
 
 const Login = () => {
@@ -12,14 +13,14 @@ const Login = () => {
         e.preventDefault()
         const form = e.target
         const email = form.email.value;
-        const password = form.email.value;
+        const password = form.password.value;
         console.log({email, password})
 
         signInUser(email, password)
             .then((data)=>{
                 console.log(data)
                 console.log(data.user)
-                const lastSignInTime = data.user.metadata.lastSignInTime;
+                const lastSignInTime = data.user?.metadata?.lastSignInTime;
                 fetch("http://localhost:5000/users",{
                     method: "PATCH",
                     headers:{
@@ -29,11 +30,25 @@ const Login = () => {
                 })
                     .then(res => res.json())
                     .then(resData => {
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: "You logged in successfully ",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
                         console.log(resData)
                     })
                 navigate(`${location.state ? location.state.from : "/"}`)
             })
             .catch((err)=>{
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: `${err.code}`,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
                 console.log(err.code)
             })
     }
