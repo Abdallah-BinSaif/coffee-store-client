@@ -19,6 +19,18 @@ const Login = () => {
             .then((data)=>{
                 console.log(data)
                 console.log(data.user)
+                const lastSignInTime = data.user.metadata.lastSignInTime;
+                fetch("http://localhost:5000/users",{
+                    method: "PATCH",
+                    headers:{
+                        "content-type": "application/json"
+                    },
+                    body: JSON.stringify({email, lastSignInTime})
+                })
+                    .then(res => res.json())
+                    .then(resData => {
+                        console.log(resData)
+                    })
                 navigate(`${location.state ? location.state.from : "/"}`)
             })
             .catch((err)=>{

@@ -16,7 +16,20 @@ const Registration = () => {
         createUser(email, password)
             .then((data)=>{
                 console.log(data)
-                console.log(data.user)
+                const lastSigInTime = data.user.metadata.lastSignInTime
+                const creationTime = data.user.metadata.creationTime
+                const uid = data.user.uid
+                fetch("http://localhost:5000/users",{
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json"
+                    },
+                    body: JSON.stringify({uid ,name, email, creationTime,lastSigInTime})
+                })
+                    .then(res=> res.json())
+                    .then(data => {
+                        console.log(data)
+                    })
                 navigate("/")
             })
             .catch((err)=>{
@@ -66,10 +79,6 @@ const Registration = () => {
                             <p className="label-text-alt">Already have an account? <Link className={"underline"} to={"/login"}>Login</Link></p>
                         </label>
                     </form>
-                    <div className={"divider"}>OR</div>
-                    <div className="form-control mb-6 mx-7">
-                        <button className="btn btn-outline">Google<FcGoogle></FcGoogle></button>
-                    </div>
                 </div>
             </div>
         </div>

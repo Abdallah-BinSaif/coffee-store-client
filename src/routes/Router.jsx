@@ -8,6 +8,7 @@ import Details from "../pages/Details.jsx";
 import Login from "../components/authentication/Login.jsx";
 import Registration from "../components/authentication/Registration.jsx";
 import Private from "../components/authentication/Private.jsx";
+import Users from "../components/users/Users.jsx";
 
 const router = createBrowserRouter([
     {
@@ -35,6 +36,9 @@ const router = createBrowserRouter([
             },{
                 path: "/register",
                 element: <Registration></Registration>
+            },{
+                path: "/users",
+                element: <Private><Users></Users></Private>
             }
         ]
     },

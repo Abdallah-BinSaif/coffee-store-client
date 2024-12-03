@@ -7,6 +7,7 @@ import icon4 from "../assets/icons/4.png"
 import Header from "../components/Header.jsx";
 import {Link} from "react-router-dom";
 import {TbMug} from "react-icons/tb";
+import Swal from "sweetalert2";
 
 const Home = () => {
     const [coffees, setCoffees] = useState([]);
@@ -20,15 +21,33 @@ const Home = () => {
 
     const handleDelete = (id) => {
         console.log(id)
-        fetch(`http://localhost:5000/coffees/${id}`,{
-            method: "DELETE",
-        }).then(res => res.json()).then(data=>{
-            console.log(data)
-            if(data.deletedCount){
-                const remaining = coffees.filter(cof => cof._id !== id)
-                setCoffees(remaining)
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/coffees/${id}`,{
+                    method: "DELETE",
+                }).then(res => res.json()).then(data=>{
+                    console.log(data)
+                    if(data.deletedCount){
+                        const remaining = coffees.filter(cof => cof._id !== id)
+                        setCoffees(remaining)
+                    }
+                });
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your Coffee has been deleted.",
+                    icon: "success"
+                });
             }
-        })
+        });
     }
     
     return (
