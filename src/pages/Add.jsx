@@ -9,7 +9,7 @@ const Add = () => {
         const form = e.target;
         const coffee = formData1(form)
         console.log(coffee)
-        fetch("http://localhost:5000/coffees",{
+        fetch("https://coffee-store-server-two-lake.vercel.app/coffees",{
             method: "POST",
             headers: {
                 "content-type": "application/json"

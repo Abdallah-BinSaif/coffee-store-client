@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 const Users = () => {
     const [users, setUsers] = useState()
     useEffect(() => {
-        fetch("http://localhost:5000/users")
+        fetch("https://coffee-store-server-two-lake.vercel.app/users")
             .then(res=> res.json())
             .then(data => {
                 console.log(data)

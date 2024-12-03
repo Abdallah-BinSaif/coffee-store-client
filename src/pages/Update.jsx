@@ -14,7 +14,7 @@ const Update = () => {
         const form = e.target;
         setCoffee(formData1(form))
         console.log(coffee)
-        fetch(`http://localhost:5000/coffees/${id}`,{
+        fetch(`https://coffee-store-server-two-lake.vercel.app/coffees/${id}`,{
             method: "PUT",
             headers: {
                 "content-type": "application/json"

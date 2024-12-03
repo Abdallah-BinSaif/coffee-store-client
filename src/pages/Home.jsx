@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
 const Home = () => {
     const [coffees, setCoffees] = useState([]);
     useEffect(() => {
-        fetch("http://localhost:5000/coffees")
+        fetch("https://coffee-store-server-two-lake.vercel.app/coffees")
             .then(res => res.json())
             .then(data => {
                 setCoffees(data)
@@ -32,7 +32,7 @@ const Home = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/coffees/${id}`,{
+                fetch(`https://coffee-store-server-two-lake.vercel.app/coffees/${id}`,{
                     method: "DELETE",
                 }).then(res => res.json()).then(data=>{
                     console.log(data)

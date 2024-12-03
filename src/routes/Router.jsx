@@ -25,10 +25,10 @@ const router = createBrowserRouter([
             },{
                 path:"/update/:id",
                 element: <Private><Update/></Private>,
-                loader: ({params}) => fetch(`http://localhost:5000/coffees/${params.id}`)
+                loader: ({params}) => fetch(`https://coffee-store-server-two-lake.vercel.app/coffees/${params.id}`)
             },{
                 path:"/details/:id",
-                loader: ({params}) => fetch(`http://localhost:5000/coffees/${params.id}`),
+                loader: ({params}) => fetch(`https://coffee-store-server-two-lake.vercel.app/coffees/${params.id}`),
                 element: <Details/>,
             },{
                 path:"/login",

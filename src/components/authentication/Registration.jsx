@@ -19,7 +19,7 @@ const Registration = () => {
                 const lastSigInTime = data.user.metadata.lastSignInTime
                 const creationTime = data.user.metadata.creationTime
                 const uid = data.user.uid
-                fetch("http://localhost:5000/users",{
+                fetch("https://coffee-store-server-two-lake.vercel.app/users",{
                     method: "POST",
                     headers: {
                         "content-type": "application/json"
